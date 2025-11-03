@@ -4,6 +4,7 @@ import "./App.css";
 import { getRandomInteger } from "./utils.js";
 
 const GENERATION = {
+  0: { id: "Any", firstDexNumber: 1, lastDexNumber: 1025 },
   1: { id: "I", firstDexNumber: 1, lastDexNumber: 151 },
   2: { id: "II", firstDexNumber: 152, lastDexNumber: 251 },
   3: { id: "III", firstDexNumber: 252, lastDexNumber: 386 },
