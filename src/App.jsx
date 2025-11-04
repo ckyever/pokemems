@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
+import dialogArrow from "./assets/dialog-arrow.png";
 import { GENERATION } from "./constants.js";
 import TallGrass from "./components/TallGrass.jsx";
 import { getRandomInteger } from "./utils.js";
@@ -89,11 +90,14 @@ function App() {
   let gameoverDialog;
   if (isWinner != null) {
     const gameOverMessage = isWinner
-      ? "Congrats, you won!"
-      : "Gameover, you lost :(";
+      ? "Congrats, you caught them all!"
+      : "You already caught that pokemon...";
     gameoverDialog = (
       <div className="gameover-dialog">
-        <div>{gameOverMessage}</div>
+        <p>
+          {gameOverMessage}
+          <img className="dialog-arrow" src={dialogArrow} alt="red arrow" />
+        </p>
         <button
           onClick={() => {
             newGame(selectedGeneration, setIsWinner, setScore, setPokemonList);

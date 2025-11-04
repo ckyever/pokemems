@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  position: relative;
 }
 
 .app p {
@@ -27,4 +28,23 @@
 .app .score {
   font-size: 2rem;
   font-weight: 600;
+}
+
+.app .gameover-dialog {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: var(--dialog-background-colour);
+  color: var(--dialog-text-colour);
+  border: var(--dialog-border);
+  border-width: var(--dialog-border-width);
+  border-radius: 12px;
+}
+
+.app .gameover-dialog .dialog-arrow {
+  width: 12px;
+  margin-left: 4px;
 }
