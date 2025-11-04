@@ -29,10 +29,16 @@ function createGrassWithPokemon(pokemonList, numberOfTallGrass) {
 function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
   const [clickedPokemon, setClickedPokemon] = useState([]);
   const [grassList, setGrassList] = useState([]);
+  const [pokemonVisible, setPokemonVisible] = useState([false]);
 
   useEffect(() => {
     setClickedPokemon([]);
+    setPokemonVisible(false);
     setGrassList(createGrassWithPokemon(pokemonList, 25));
+
+    setTimeout(() => {
+      setPokemonVisible(true);
+    }, 300);
   }, [pokemonList]);
 
   function handlePokemonClick(pokemonKey) {
@@ -42,13 +48,17 @@ function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
       console.log("You already clicked on this one");
       setIsWinner(false);
     } else {
+      setPokemonVisible(false);
       setClickedPokemon([...clickedPokemon, pokemonKey]);
       incrementScore();
       if (clickedPokemon.length + 1 === pokemonList.length) {
         setIsWinner(true);
       } else {
-        // Randomise pokemon positions again
-        setGrassList(createGrassWithPokemon(pokemonList, 25));
+        setTimeout(() => {
+          // Randomise pokemon positions again
+          setGrassList(createGrassWithPokemon(pokemonList, 25));
+          setPokemonVisible(true);
+        }, 300);
       }
     }
   }
@@ -60,7 +70,7 @@ function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
           <div key={index} className="grass">
             {grass != null ? (
               <img
-                className="pokemon"
+                className={`pokemon ${pokemonVisible ? "visible" : ""}`}
                 src={grass.pokemonSprite}
                 alt={grass.pokemonName + " sprite"}
                 onClick={() => {
