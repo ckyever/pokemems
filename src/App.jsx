@@ -1,32 +1,89 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import { GENERATION } from "./constants.js";
 import TallGrass from "./components/TallGrass.jsx";
+import { getRandomInteger } from "./utils.js";
+
+const SHINY_CHANCE = 0.3;
+
+function getRandomDexNumbers(generation, numberToSpawn) {
+  const dexNumbers = [];
+
+  for (let i = 1; i <= numberToSpawn; i++) {
+    const randomDexNumber = getRandomInteger(
+      GENERATION[generation].firstDexNumber,
+      GENERATION[generation].lastDexNumber
+    );
+
+    if (dexNumbers.includes(randomDexNumber)) {
+      // Don't include repeats so try again
+      i--;
+    } else {
+      dexNumbers.push(randomDexNumber);
+    }
+  }
+
+  return dexNumbers;
+}
+
+async function getPokemon(dexNumbers) {
+  const pokemonList = [];
+
+  const responses = await Promise.all(
+    dexNumbers.map((number) =>
+      fetch(`https://pokeapi.co/api/v2/pokemon/${number}`)
+    )
+  );
+
+  const pokemonData = await Promise.all(
+    responses.map((response) => response.json())
+  );
+
+  // Let there be a slight chance for no more than one shiny pokemon
+  const hasShiny = Math.random() < SHINY_CHANCE;
+  let shinyPokemonIndex = -1;
+  if (hasShiny) {
+    shinyPokemonIndex = Math.floor(Math.random() * pokemonData.length);
+  }
+
+  pokemonData.forEach((pokemon, index) =>
+    pokemonList.push({
+      name: pokemon.species.name,
+      sprite:
+        index === shinyPokemonIndex
+          ? pokemon.sprites.front_shiny
+          : pokemon.sprites.front_default,
+    })
+  );
+
+  return pokemonList;
+}
+
+async function newGame(generation, setIsWinner, setScore, setPokemonList) {
+  setIsWinner(null);
+  setScore(0);
+  const dexNumbers = getRandomDexNumbers(generation, 9);
+  const pokemonList = await getPokemon(dexNumbers);
+  setPokemonList(pokemonList);
+}
 
 function App() {
   const [selectedGeneration, setSelectedGeneration] = useState(1);
+  const [pokemonList, setPokemonList] = useState([]);
   const [score, setScore] = useState(0);
   const [isWinner, setIsWinner] = useState(null);
 
-  // Create function that gets a list of n pokemon from the current generation
-  // Add state for pokemonList where initial is calling above function with selectedGeneration
-  // If generation is changed set the list again with new pokemon
-  // Add state for clickedPokemon that tracks all the ones the user clicked on
-  // Each time they click on a pokemon if it is already in clicked they lose
-  // If length of pokemonList and clickedPokemon are the same they win
+  useEffect(() => {
+    newGame(selectedGeneration, setIsWinner, setScore, setPokemonList);
+  }, [selectedGeneration]);
 
   function handleGenerationChange(event) {
     setSelectedGeneration(event.target.value);
-    setIsWinner(null);
   }
 
   function incrementScore() {
     setScore(score + 1);
-  }
-
-  function resetScore() {
-    setScore(0);
   }
 
   let gameoverDialog;
@@ -34,7 +91,18 @@ function App() {
     const gameOverMessage = isWinner
       ? "Congrats, you won!"
       : "Gameover, you lost :(";
-    gameoverDialog = <div>{gameOverMessage}</div>;
+    gameoverDialog = (
+      <div className="gameover-dialog">
+        <div>{gameOverMessage}</div>
+        <button
+          onClick={() => {
+            newGame(selectedGeneration, setIsWinner, setScore, setPokemonList);
+          }}
+        >
+          New Game
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -55,11 +123,9 @@ function App() {
         })}
       </select>
       <TallGrass
-        generation={selectedGeneration}
-        numberToSpawn={9}
+        pokemonList={pokemonList}
         isWinner={isWinner}
         setIsWinner={setIsWinner}
-        resetScore={resetScore}
         incrementScore={incrementScore}
       />
       {gameoverDialog}
