@@ -1,45 +1,24 @@
 import { useState } from "react";
 
 import "./App.css";
-import { getRandomInteger } from "./utils.js";
-
-const GENERATION = {
-  0: { id: "Any", firstDexNumber: 1, lastDexNumber: 1025 },
-  1: { id: "I", firstDexNumber: 1, lastDexNumber: 151 },
-  2: { id: "II", firstDexNumber: 152, lastDexNumber: 251 },
-  3: { id: "III", firstDexNumber: 252, lastDexNumber: 386 },
-  4: { id: "IV", firstDexNumber: 387, lastDexNumber: 493 },
-  5: { id: "V", firstDexNumber: 494, lastDexNumber: 649 },
-  6: { id: "VI", firstDexNumber: 650, lastDexNumber: 721 },
-  7: { id: "VII", firstDexNumber: 722, lastDexNumber: 809 },
-  8: { id: "VIII", firstDexNumber: 810, lastDexNumber: 905 },
-  9: { id: "IX", firstDexNumber: 906, lastDexNumber: 1025 },
-};
-
-async function getPokemon(dexNumber) {
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${dexNumber}`
-  );
-  const pokemonData = await response.json();
-  console.log(pokemonData.species.name);
-}
+import { GENERATION } from "./constants.js";
+import TallGrass from "./components/TallGrass.jsx";
 
 function App() {
   const [selectedGeneration, setSelectedGeneration] = useState(1);
+  // Create function that gets a list of n pokemon from the current generation
+  // Add state for pokemonList where initial is calling above function with selectedGeneration
+  // If generation is changed set the list again with new pokemon
+  // Add state for clickedPokemon that tracks all the ones the user clicked on
+  // Each time they click on a pokemon if it is already in clicked they lose
+  // If length of pokemonList and clickedPokemon are the same they win
 
   function handleGenerationChange(event) {
     setSelectedGeneration(event.target.value);
   }
 
-  const randomDexNumber = getRandomInteger(
-    GENERATION[selectedGeneration].firstDexNumber,
-    GENERATION[selectedGeneration].lastDexNumber
-  );
-
-  getPokemon(randomDexNumber);
-
   return (
-    <>
+    <div className="app">
       <label htmlFor="generation">Generation</label>
       <select
         id="generation"
@@ -54,7 +33,8 @@ function App() {
           );
         })}
       </select>
-    </>
+      <TallGrass generation={selectedGeneration} numberToSpawn={9} />
+    </div>
   );
 }
 
