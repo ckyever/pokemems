@@ -59,7 +59,13 @@ async function getPokemon(dexNumbers) {
   return pokemonList;
 }
 
-function TallGrass({ generation, numberToSpawn = 9, isWinner, setIsWinner }) {
+function TallGrass({
+  generation,
+  numberToSpawn = 9,
+  isWinner,
+  setIsWinner,
+  incrementScore,
+}) {
   const [pokemonList, setPokemonList] = useState([]);
   const [clickedPokemon, setClickedPokemon] = useState([]);
 
@@ -80,6 +86,7 @@ function TallGrass({ generation, numberToSpawn = 9, isWinner, setIsWinner }) {
       setIsWinner(false);
     } else {
       setClickedPokemon([...clickedPokemon, pokemonKey]);
+      incrementScore();
       if (clickedPokemon.length + 1 === pokemonList.length) {
         setIsWinner(true);
       }

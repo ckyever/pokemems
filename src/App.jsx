@@ -6,6 +6,7 @@ import TallGrass from "./components/TallGrass.jsx";
 
 function App() {
   const [selectedGeneration, setSelectedGeneration] = useState(1);
+  const [score, setScore] = useState(0);
   const [isWinner, setIsWinner] = useState(null);
 
   // Create function that gets a list of n pokemon from the current generation
@@ -20,6 +21,10 @@ function App() {
     setIsWinner(null);
   }
 
+  function incrementScore() {
+    setScore(score + 1);
+  }
+
   let gameoverDialog;
   if (isWinner != null) {
     const gameOverMessage = isWinner
@@ -30,6 +35,7 @@ function App() {
 
   return (
     <div className="app">
+      <div>Score: {score}</div>
       <label htmlFor="generation">Generation</label>
       <select
         id="generation"
@@ -49,6 +55,7 @@ function App() {
         numberToSpawn={9}
         isWinner={isWinner}
         setIsWinner={setIsWinner}
+        incrementScore={incrementScore}
       />
       {gameoverDialog}
     </div>
