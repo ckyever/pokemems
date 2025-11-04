@@ -6,6 +6,8 @@ import TallGrass from "./components/TallGrass.jsx";
 
 function App() {
   const [selectedGeneration, setSelectedGeneration] = useState(1);
+  const [isWinner, setIsWinner] = useState(null);
+
   // Create function that gets a list of n pokemon from the current generation
   // Add state for pokemonList where initial is calling above function with selectedGeneration
   // If generation is changed set the list again with new pokemon
@@ -15,6 +17,14 @@ function App() {
 
   function handleGenerationChange(event) {
     setSelectedGeneration(event.target.value);
+  }
+
+  let gameoverDialog;
+  if (isWinner != null) {
+    const gameOverMessage = isWinner
+      ? "Congrats, you won!"
+      : "Gameover, you lost :(";
+    gameoverDialog = <div>{gameOverMessage}</div>;
   }
 
   return (
@@ -33,7 +43,12 @@ function App() {
           );
         })}
       </select>
-      <TallGrass generation={selectedGeneration} numberToSpawn={9} />
+      <TallGrass
+        generation={selectedGeneration}
+        numberToSpawn={9}
+        setIsWinner={setIsWinner}
+      />
+      {gameoverDialog}
     </div>
   );
 }
