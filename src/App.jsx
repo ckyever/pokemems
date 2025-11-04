@@ -25,6 +25,10 @@ function App() {
     setScore(score + 1);
   }
 
+  function resetScore() {
+    setScore(0);
+  }
+
   let gameoverDialog;
   if (isWinner != null) {
     const gameOverMessage = isWinner
@@ -55,6 +59,7 @@ function App() {
         numberToSpawn={9}
         isWinner={isWinner}
         setIsWinner={setIsWinner}
+        resetScore={resetScore}
         incrementScore={incrementScore}
       />
       {gameoverDialog}

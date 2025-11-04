@@ -64,6 +64,7 @@ function TallGrass({
   numberToSpawn = 9,
   isWinner,
   setIsWinner,
+  resetScore,
   incrementScore,
 }) {
   const [pokemonList, setPokemonList] = useState([]);
@@ -71,6 +72,7 @@ function TallGrass({
 
   useEffect(() => {
     (async () => {
+      resetScore();
       setClickedPokemon([]);
       const dexNumbers = getRandomDexNumbers(generation, numberToSpawn);
       const pokemonList = await getPokemon(dexNumbers);
