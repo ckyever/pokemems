@@ -59,12 +59,13 @@ async function getPokemon(dexNumbers) {
   return pokemonList;
 }
 
-function TallGrass({ generation, numberToSpawn = 9, setIsWinner }) {
+function TallGrass({ generation, numberToSpawn = 9, isWinner, setIsWinner }) {
   const [pokemonList, setPokemonList] = useState([]);
   const [clickedPokemon, setClickedPokemon] = useState([]);
 
   useEffect(() => {
     (async () => {
+      setClickedPokemon([]);
       const dexNumbers = getRandomDexNumbers(generation, numberToSpawn);
       const pokemonList = await getPokemon(dexNumbers);
       setPokemonList(pokemonList);
@@ -72,6 +73,8 @@ function TallGrass({ generation, numberToSpawn = 9, setIsWinner }) {
   }, [generation, numberToSpawn]);
 
   function handlePokemonClick(pokemonKey) {
+    if (isWinner != null) return;
+
     if (clickedPokemon.includes(pokemonKey)) {
       console.log("You already clicked on this one");
       setIsWinner(false);

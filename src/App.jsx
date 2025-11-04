@@ -17,6 +17,7 @@ function App() {
 
   function handleGenerationChange(event) {
     setSelectedGeneration(event.target.value);
+    setIsWinner(null);
   }
 
   let gameoverDialog;
@@ -46,6 +47,7 @@ function App() {
       <TallGrass
         generation={selectedGeneration}
         numberToSpawn={9}
+        isWinner={isWinner}
         setIsWinner={setIsWinner}
       />
       {gameoverDialog}
