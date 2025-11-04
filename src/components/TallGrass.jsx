@@ -4,6 +4,8 @@ import "../styles/TallGrass.css";
 import { GENERATION } from "../constants.js";
 import { getRandomInteger } from "../utils.js";
 
+const SHINY_CHANCE = 0.3;
+
 function getRandomDexNumbers(generation, numberToSpawn) {
   const dexNumbers = [];
 
@@ -37,10 +39,20 @@ async function getPokemon(dexNumbers) {
     responses.map((response) => response.json())
   );
 
-  pokemonData.forEach((pokemon) =>
+  // Let there be a slight chance for no more than one shiny pokemon
+  const hasShiny = Math.random() < SHINY_CHANCE;
+  let shinyPokemonIndex = -1;
+  if (hasShiny) {
+    shinyPokemonIndex = Math.floor(Math.random() * pokemonData.length);
+  }
+
+  pokemonData.forEach((pokemon, index) =>
     pokemonList.push({
       name: pokemon.species.name,
-      sprite: pokemon.sprites.front_default,
+      sprite:
+        index === shinyPokemonIndex
+          ? pokemon.sprites.front_shiny
+          : pokemon.sprites.front_default,
     })
   );
 
