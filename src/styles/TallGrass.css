@@ -1,3 +1,25 @@
 .tall-grass {
-  display: flex;
+  margin: 20px;
+  padding: 80px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  row-gap: 40px;
+  column-gap: 20px;
+}
+
+.tall-grass .grass {
+  position: relative;
+}
+
+.tall-grass .grass .pokemon {
+  top: -50px;
+  left: -10px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tall-grass .grass .tall-grass-sprite {
+  position: relative;
+  width: 80px;
+  z-index: 2;
 }
