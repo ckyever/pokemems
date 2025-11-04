@@ -93,7 +93,7 @@ function App() {
       ? "Congrats, you caught them all!"
       : "You already caught that pokemon...";
     gameoverDialog = (
-      <div className="gameover-dialog">
+      <div className="gameover-dialog textbox">
         <p>
           {gameOverMessage}
           <img className="dialog-arrow" src={dialogArrow} alt="red arrow" />
@@ -112,24 +112,26 @@ function App() {
 
   return (
     <div className="app">
-      <div className="generation-dropdown">
-        <label htmlFor="generation">Generation</label>
-        <select
-          id="generation"
-          value={selectedGeneration}
-          onChange={handleGenerationChange}
-        >
-          {Object.keys(GENERATION).map((key) => {
-            return (
-              <option key={key} value={key}>
-                {GENERATION[key].id}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <p>Catch each pokemon only once</p>
-      <p className="score">Score: {score}</p>
+      <header className="textbox">
+        <div className="generation-dropdown">
+          <label htmlFor="generation">Generation</label>
+          <select
+            id="generation"
+            value={selectedGeneration}
+            onChange={handleGenerationChange}
+          >
+            {Object.keys(GENERATION).map((key) => {
+              return (
+                <option key={key} value={key}>
+                  {GENERATION[key].id}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <p>Catch each pokemon only once</p>
+        <p className="score">Score: {score}</p>
+      </header>
       <TallGrass
         pokemonList={pokemonList}
         isWinner={isWinner}

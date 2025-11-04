@@ -18,6 +18,23 @@
   margin: 0;
 }
 
+.app .textbox {
+  padding: 10px 20px;
+  background-color: var(--dialog-background-colour);
+  color: var(--dialog-text-colour);
+  border: var(--dialog-border);
+  border-width: var(--dialog-border-width);
+  border-radius: 12px;
+}
+
+.app header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
 .app .generation-dropdown {
   display: flex;
   justify-content: center;
@@ -35,8 +52,7 @@
 }
 
 .app .score {
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.4rem;
 }
 
 .app .gameover-dialog {
@@ -47,12 +63,6 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  background-color: var(--dialog-background-colour);
-  color: var(--dialog-text-colour);
-  border: var(--dialog-border);
-  border-width: var(--dialog-border-width);
-  border-radius: 12px;
 }
 
 .app .gameover-dialog .dialog-arrow {
