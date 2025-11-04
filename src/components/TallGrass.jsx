@@ -46,6 +46,9 @@ function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
       incrementScore();
       if (clickedPokemon.length + 1 === pokemonList.length) {
         setIsWinner(true);
+      } else {
+        // Randomise pokemon positions again
+        setGrassList(createGrassWithPokemon(pokemonList, 25));
       }
     }
   }
