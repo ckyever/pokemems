@@ -10,4 +10,21 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 8px;
+}
+
+.app p {
+  margin: 0;
+}
+
+.app .generation-dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.app .score {
+  font-size: 2rem;
+  font-weight: 600;
 }

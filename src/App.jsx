@@ -107,21 +107,24 @@ function App() {
 
   return (
     <div className="app">
-      <div>Score: {score}</div>
-      <label htmlFor="generation">Generation</label>
-      <select
-        id="generation"
-        value={selectedGeneration}
-        onChange={handleGenerationChange}
-      >
-        {Object.keys(GENERATION).map((key) => {
-          return (
-            <option key={key} value={key}>
-              {GENERATION[key].id}
-            </option>
-          );
-        })}
-      </select>
+      <div className="generation-dropdown">
+        <label htmlFor="generation">Generation</label>
+        <select
+          id="generation"
+          value={selectedGeneration}
+          onChange={handleGenerationChange}
+        >
+          {Object.keys(GENERATION).map((key) => {
+            return (
+              <option key={key} value={key}>
+                {GENERATION[key].id}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <p>Catch each pokemon only once</p>
+      <p className="score">Score: {score}</p>
       <TallGrass
         pokemonList={pokemonList}
         isWinner={isWinner}

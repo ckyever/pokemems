@@ -1,5 +1,5 @@
 .tall-grass {
-  padding: 80px;
+  padding-top: 40px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   row-gap: 40px;
