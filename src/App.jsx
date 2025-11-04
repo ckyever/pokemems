@@ -103,6 +103,7 @@ function App() {
             newGame(selectedGeneration, setIsWinner, setScore, setPokemonList);
           }}
         >
+          <span className="option-arrow">►</span>
           New Game
         </button>
       </div>

@@ -44,6 +44,8 @@
   z-index: 5;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 8px;
   padding: 10px 20px;
   background-color: var(--dialog-background-colour);
@@ -57,4 +59,29 @@
   width: 12px;
   margin-left: 4px;
   margin-bottom: 4px;
+  animation: bob-up-down 0.25s steps(2, start) infinite alternate;
+}
+
+@keyframes bob-up-down {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}
+
+.app .gameover-dialog button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app .gameover-dialog button .option-arrow {
+  color: var(--dialog-text-colour);
+  margin-right: 8px;
+}
+
+.app .gameover-dialog button:hover .option-arrow {
+  transform: translateY(-2px);
 }
