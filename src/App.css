@@ -12,6 +12,7 @@
   align-items: center;
   gap: 16px;
   position: relative;
+  margin-top: 50px;
 }
 
 .app p {
@@ -19,7 +20,7 @@
 }
 
 .app .textbox {
-  padding: 10px 20px;
+  padding: 16px 20px;
   background-color: var(--dialog-background-colour);
   color: var(--dialog-text-colour);
   border: var(--dialog-border);
