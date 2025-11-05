@@ -27,7 +27,8 @@
   border-radius: 12px;
 }
 
-.app header {
+.app header,
+.app footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,13 +48,13 @@
   text-align: center;
   background-color: rgba(0, 0, 0, 0.08);
   font-family: "Press Start 2P", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  padding: 8px 0px;
+  padding: 6px 0px;
   border: none;
   border-radius: 8px;
 }
 
 .app .score {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .app .gameover-dialog {
@@ -69,7 +70,6 @@
 .app .gameover-dialog .dialog-arrow {
   width: 12px;
   margin-left: 4px;
-  margin-bottom: 4px;
   animation: bob-up-down 0.25s steps(2, start) infinite alternate;
 }
 

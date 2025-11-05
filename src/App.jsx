@@ -89,9 +89,15 @@ function App() {
 
   let gameoverDialog;
   if (isWinner != null) {
-    const gameOverMessage = isWinner
-      ? "Congrats, you caught them all!"
-      : "You already caught that pokemon...";
+    const gameOverMessage = isWinner ? (
+      "Congrats, you caught them all!"
+    ) : (
+      <>
+        You already caught
+        <br />
+        that pokemon...
+      </>
+    );
     gameoverDialog = (
       <div className="gameover-dialog textbox">
         <p>
@@ -113,6 +119,16 @@ function App() {
   return (
     <div className="app">
       <header className="textbox">
+        <p>Catch each pokemon only once</p>
+        <p className="score">Score: {score}</p>
+      </header>
+      <TallGrass
+        pokemonList={pokemonList}
+        isWinner={isWinner}
+        setIsWinner={setIsWinner}
+        incrementScore={incrementScore}
+      />
+      <footer className="textbox">
         <div className="generation-dropdown">
           <label htmlFor="generation">Generation</label>
           <select
@@ -129,15 +145,8 @@ function App() {
             })}
           </select>
         </div>
-        <p>Catch each pokemon only once</p>
-        <p className="score">Score: {score}</p>
-      </header>
-      <TallGrass
-        pokemonList={pokemonList}
-        isWinner={isWinner}
-        setIsWinner={setIsWinner}
-        incrementScore={incrementScore}
-      />
+        <p>Changing this will reset the score</p>
+      </footer>
       {gameoverDialog}
     </div>
   );
