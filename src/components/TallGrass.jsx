@@ -45,7 +45,6 @@ function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
     if (isWinner != null) return;
 
     if (clickedPokemon.includes(pokemonKey)) {
-      console.log("You already clicked on this one");
       setIsWinner(false);
     } else {
       setPokemonVisible(false);

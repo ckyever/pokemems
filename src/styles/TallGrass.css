@@ -27,8 +27,33 @@
   transform: translateY(0px);
 }
 
-.tall-grass .grass:hover .pokemon {
-  transform: translateY(-10px);
+.tall-grass .grass:hover .pokemon.visible {
+  z-index: 3;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  10% {
+    transform: translateX(-1.5px) rotate(-1.5deg);
+  }
+  40% {
+    transform: translateX(1.5px) rotate(1.5deg);
+  }
+  50% {
+    transform: translateX(-1.5px) rotate(-1.5deg);
+  }
+  80% {
+    transform: translateX(1.5px) rotate(1.5deg);
+  }
+  90% {
+    transform: translateX(-1.5px) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
 }
 
 .tall-grass .grass .tall-grass-sprite {
