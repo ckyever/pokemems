@@ -90,7 +90,11 @@ function App() {
   let gameoverDialog;
   if (isWinner != null) {
     const gameOverMessage = isWinner ? (
-      "Congrats, you caught them all!"
+      <>
+        Congrats, you caught
+        <br />
+        them all!
+      </>
     ) : (
       <>
         You already caught
