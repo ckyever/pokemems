@@ -69,7 +69,7 @@ function TallGrass({ pokemonList, isWinner, setIsWinner, incrementScore }) {
           <div key={index} className="grass">
             <img
               className={`pokemon ${grass && pokemonVisible ? "visible" : ""}`}
-              src={grass ? grass.pokemonSprite : ""}
+              src={grass ? grass.pokemonSprite : null}
               alt={grass ? grass.pokemonName + " sprite" : ""}
               onClick={() => {
                 handlePokemonClick(grass.pokemonName);
