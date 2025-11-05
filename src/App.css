@@ -99,3 +99,15 @@
 .app .gameover-dialog button:hover .option-arrow {
   transform: translateY(-2px);
 }
+
+@media (max-width: 500px) {
+  .app {
+    margin: 0px;
+    padding: 8px 8px;
+    font-size: 0.8rem;
+  }
+
+  .app .textbox {
+    padding: 8px;
+  }
+}
